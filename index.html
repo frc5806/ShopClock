@@ -4,17 +4,80 @@
 <head>
     <title>FRC 5806 Shop Clock</title>
     <style>
+        @import 'https://fonts.googleapis.com/css?family=Ubuntu';
+
         body, html {
             height:100%;
             display: flex;
             align-items: center;
             justify-content: center;
+            overflow: hidden;
+        }
+
+        .container {
+            font-family: 'Ubuntu', sans-serif;
+            text-align:center;
+        }
+
+        #time {
+            font-size:10em;
+        }
+        
+        #timeType {
+            font-size:5em;
+            vertical-align: top;
+        }
+
+        #date, #build {
+            font-size:3em;
+        }
+
+        #announcements {
+            margin-top:1em;
+            font-size:2em;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        hello world
+        <span id="time">5:30:10</span> <span id="timeType">PM</span><br />
+        <span id="date">9/14/16, </span><span id="build">190 Days Until Build</span><br />
+        <div id="announcements">Next Meeting: I Period, 9/29/2016</div>
     </div>
+
+    <script>
+        window.onload = function() {
+            var timeDiv = document.getElementById("time");
+            var typeDiv = document.getElementById("timeType");
+            var dateDiv = document.getElementById("date");
+            var buildDiv = document.getElementById("build");
+
+            setInterval(function() {
+                location.reload();
+            },300000);
+
+            setInterval(function() {
+                var date = new Date();
+                
+                var hours = date.getHours();
+                var type = hours > 12 ? "PM" : "AM";
+                hours = hours % 12;
+                hours = hours ? hours : 12;
+                var dateString = hours + ":" + date.getMinutes() + ":" + date.getSeconds();
+
+                var buildDate = new Date(2017,0,6,10,0,0,0)
+                
+                timeDiv.innerHTML = dateString;
+                typeDiv.innerHTML = type;
+
+                dateDiv.innerHTML = (date.getMonth()+1) + "/" + date.getDate() + ", ";
+
+                var daysLeft = Math.floor((buildDate.getTime() - date.getTime())/86400000)
+
+                buildDiv.innerHTML = daysLeft + " Days Until Build";
+            },1000);
+        }
+    
+    </script>
 </body>
 </html>
