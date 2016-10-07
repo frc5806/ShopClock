@@ -40,8 +40,8 @@
 </head>
 <body>
     <div class="container">
-        <span id="time">5:30:10</span> <span id="timeType">PM</span><br />
-        <span id="date">9/14/16, </span><span id="build">190 Days Until Build</span><br />
+        <span id="time"></span> <span id="timeType"></span><br />
+        <span id="date"></span><span id="build"></span><br />
         <div id="announcements">Next FRC Meeting: 10/14 3-6pm</div>
     </div>
 
@@ -70,6 +70,7 @@
                 var type = hours > 12 ? "PM" : "AM";
                 hours = hours % 12;
                 hours = hours ? hours : 12;
+                
                 var dateString = pad(hours,2) + ":" + pad(date.getMinutes(),2) + ":" + pad(date.getSeconds(),2);
 
                 var buildDate = new Date(2017,0,6,10,0,0,0)
