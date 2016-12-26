@@ -22,17 +22,21 @@
         #time {
             font-size:12em;
         }
-        
+
         #announcements {
             margin-top:0.1em;
-            font-size:5em;
+            font-size:8em;
+        }
+
+        #week, #day {
+            font-weight:900;
         }
     </style>
 </head>
 <body>
     <div class="container">
         <span id="time"></span><br />
-        <div id="announcements">Next Meeting: 1/6 3-6pm</div>
+        <div id="announcements">Day <span id="day">5</span> of Week <span id="week">3</span></div>
     </div>
 
     <script>
@@ -65,13 +69,18 @@
 
             setInterval(function() {
                 var date = new Date();
-                
-                var timeLeft = getTimeRemaining(new Date(2017,0,7,10,0,0,0));
-                
+
+                var timeLeft = getTimeRemaining(new Date(2017,1,21,23,59,0,0));
+
+                var timeSince = getTimeRemaining(new Date(2017,0,7,0,0,0,0));
+
+                document.getElementById("week").innerHTML = Math.ceil(-timeSince.days / 7);
+                document.getElementById("day").innerHTML = Math.ceil(timeSince.days % 7);
+
                 timeDiv.innerHTML = timeLeft.days + ":" + timeLeft.hours + ":" + timeLeft.minutes + ":" + timeLeft.seconds;
             },1000);
         }
-    
+
     </script>
 </body>
 </html>
